@@ -18,7 +18,7 @@
 				<form:form method="POST" modelAttribute="cliente"
 				action="/gym/clientes/update">
 				
-			<input type="hidden" name="${_csrf.parameterName}"
+			  <input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 					
 					<div class="form-group col-md-12">
