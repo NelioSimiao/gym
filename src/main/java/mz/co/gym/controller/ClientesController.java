@@ -52,9 +52,8 @@ public class ClientesController {
 	@PostMapping()
 	@Transactional
 	public String adicionar(Cliente cliente, RedirectAttributes redirectModel) {
-
-		this.clienteRepository.save(cliente);
 		redirectModel.addFlashAttribute("msg", "Cliente cadastrado com sucesso!");
+		this.clienteRepository.save(cliente);
 		return REDIRECT_PAGINA_CLIENTES;
 	}
 

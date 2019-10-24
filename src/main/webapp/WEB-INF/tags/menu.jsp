@@ -4,37 +4,57 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-<nav class="navbar navbar-default">
+<nav class="navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#menu" aria-expanded="false">
-				<span class="sr-only">Menu</span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
+
 			<!-- <a class="navbar-brand" href="<c:url value='/' />">NANDO'S GYM </a> -->
 		</div>
 
+
 		<div class="collapse navbar-collapse" id="menu">
-			<ul class="nav navbar-nav">
-				<sec:authorize access="!isAuthenticated()">
-					<li><a href="<c:url value='/login' />">Login</a></li>
-				</sec:authorize>
 
-				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value='/clientes' />">Clientes</a></li>
-				</sec:authorize>
-			</ul>
+			<sec:authorize access="!isAuthenticated()">
+				<ul class="nav navbar-nav navbar-left">
 
-			<sec:authorize access="isAuthenticated()">
-				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<form method="post" action="<c:url value='/logout' />">
-							<button class="btn-link btn-logout">Logout</button>
-						</form>
+					<a href="<c:url value='/login' />">Login</a>
 					</li>
 				</ul>
 			</sec:authorize>
+
+
+			<sec:authorize access="isAuthenticated()">
+				<a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Administração </a>
+
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="<c:url value='/clientes'/>">
+							Clientes </a> <a class="dropdown-item"
+							href="<c:url value='/clientes'/>"> Pagamentos </a>
+					</div>
+			</sec:authorize>
+
+
+			<sec:authorize access="isAuthenticated()">
+
+				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<form method="post" action="<c:url value='/logout' />">
+								<button class="btn btn-light text-primary">Sair</button>
+							</form>
+						</li>
+
+					</ul>
+				</div>
+
+
+			</sec:authorize>
+
 		</div>
 	</div>
 </nav>

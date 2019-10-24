@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="custom" tagdir="/WEB-INF/tags"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <custom:template title="Cadastrar novo Processo">
 	<jsp:body>
 		<div class="container">
-			<h3 class="text-center">Cadastrar novo Cliente</h3>
+			<h4 class="text-center text-primary  ">Cadastrar novo Cliente</h4>
 			
 		  <form method="post" action="<c:url value='/clientes' />">
 		
@@ -16,7 +16,7 @@
 				<div class="form-group col-md-12">
 					<label for="autor">Nome Completo</label>
 			
-				 <input name="nomeCompleto" id="nomeCompleto" class="form-control"  />
+				 <input name="nomeCompleto" id="nomeCompleto" class="form-control" />
 				
 				</div>
 				<div class="form-group col-md-4">
@@ -57,17 +57,31 @@
 				</div>
 				
 				<div class="form-group col-md-6">
-					<label for="descricao">Data de Nascimento</label>
-					<input id="dataDeNascimento" name="dataDeNascimento"
-							class="form-control" placeholder="dd/MM/YYY"
-							<c:out value="${cliente.dataDeNascimento}" /> />
+			     <label for="descricao">Data de Nascimento</label>
+					<div class="input-group date" data-provide="datepicker">
+	                      <input id="dataDeNascimento"
+								name="dataDeNascimento" type="text" class="form-control"
+								placeholder="dd/MM/YYYY" data-date-format='yyyy-MM-dd'
+								<c:out value="${cliente.dataDeNascimento}" />>
+	                       <div class="input-group-addon">
+	                      <span class="glyphicon glyphicon-trash"></span>
+	                    </div>
+	                 </div>
 				</div>
 				
-				<div class="form-group col-md-6">
-					<label for="descricao">Data de Inicio</label>
-					<input id="dataDeInicio" name="dataDeInicio" class="form-control"
-							placeholder="dd/MM/YYY" <c:out value="${cliente.dataDeInicio}" /> />
-				</div>  
+			  <div class="form-group col-md-6">
+			     <label for="descricao">Data de Nascimento</label>
+					<div class="input-group date" data-provide="datepicker">
+	                      <input id="dataDeInicio" name="dataDeInicio"
+								type="text" class="form-control" placeholder="dd/MM/YYYY"
+								data-date-format='yyyy-MM-dd'
+								<c:out value="${cliente.dataDeInicio}" />>
+	                       <div class="input-group-addon">
+	                      <span class="glyphicon glyphicon-trash"></span>
+	                    </div>
+	                 </div>
+				</div>
+
 	            <div class="form-group col-md-12">
 				<input type="submit" value="Gravar" class="btn btn-primary">
 				<a href="<c:url value='/clientes' />" class="btn btn-default">Cancelar</a>
@@ -75,5 +89,15 @@
 				</div>
 			</form>
 		</div>
+		
+		
+	<script type="text/javascript">
+		$('.datepicker').datepicker({
+			format : 'yyyy-MM-dd',
+			startDate : '+0d',
+			language : 'pt-BR'
+		});
+	</script>
+	
 	</jsp:body>
 </custom:template>

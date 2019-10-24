@@ -15,6 +15,9 @@
 	<title>${title}</title>
 	
 	<link rel="stylesheet" href="<c:url value='/assets/vendor/bootstrap/css/bootstrap.min.css' />">
+	
+	<link rel="stylesheet" href="<c:url value='/assets/vendor/bootstrap/css/bootstrap-datepicker.css' />">
+	
 	<link rel="stylesheet" href="<c:url value='/assets/css/style.css' />">
 	
 	<!-- Puxa os outros estilos especificos da pagina -->
@@ -28,10 +31,18 @@
 		<jsp:doBody />
 	</div>
 	
-	<script type="text/javascript" src="<c:url value='/assets/vendor/jquery/jquery-1.11.2.min.js' />"></script>
+	<script type="text/javascript" src="<c:url value='/assets/vendor/jquery/jquery-3.4.1.min.js' />"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script>
 	<script type="text/javascript" src="<c:url value='/assets/vendor/bootstrap/bootstrap.min.js' />"></script>
 	
-	<!-- Puxa os scripts especificos da pagina -->
+	
+	<script type="text/javascript" src="<c:url value='/assets/vendor/bootstrap/bootstrap-datepicker.min.js' />"></script>
+	<script type="text/javascript" src="<c:url value='/assets/vendor/bootstrap/bootstrap-datepicker.pt.min.js' />"></script>
+	<script type="text/javascript" src="<c:url value='/assets/vendor/bootstrap/bootstrap-datepicker.pt-BR.min.js' />"></script>
+	
+	
+	
+<!--	 Puxa os scripts especificos da pagina -->
 	<jsp:invoke fragment="extraScripts" />
 </body>
 </html>

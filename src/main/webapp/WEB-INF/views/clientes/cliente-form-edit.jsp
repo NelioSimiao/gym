@@ -70,13 +70,13 @@
 				<div class="form-group col-md-6">
 					<label for="descricao">Data de Nascimento</label>
 					<form:input path="dataDeNascimento" name="dataDeNascimento"
-							class="form-control" placeholder="dd/MM/YYY" />
+							class="form-control" placeholder="dd/MM/YYYY" />
 				</div>
 				
 				<div class="form-group col-md-6">
 					<label for="descricao">Data de Inicio</label>
 					<form:input path="dataDeInicio" name="dataDeInicio"
-							class="form-control" placeholder="dd/MM/YYY" />
+							class="form-control" placeholder="dd/MM/YYYY" />
 				</div>  
 	            <div class="form-group col-md-12">
 				<input type="submit" value="Gravar" class="btn btn-primary" />

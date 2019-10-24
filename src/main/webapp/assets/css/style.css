@@ -7,3 +7,8 @@
 .table td form {
 	display: inline-block;
 }
+
+h4{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}

@@ -9,23 +9,22 @@
 <custom:template title="Processos cadastradas">
 	<jsp:body>
 		<div class="container">
-			<h3 class="text-center">Clientes </h3>
-			
-			<a href="<c:url value='/clientes/form' />" class="btn btn-primary">Novo</a>
+		
+			<h4 class="text-center text-primary ">Clientes </h4>
 			
 			<div class="table-responsive">
 				<table class="table table-stripped table-hover">
-					<thead>
+					<thead class="thead-light">
 						<tr>
-							<th>Nome Completo</th>
-							<th>Número BI</th>	
-							<th>Contacto</th>
-							<th>Profissão</th>
-							<th>Residencia</th>																					
-							<th>Inscrição</th>
-							<th>Inicio</th>	
-							<th>Actualizar</th>												
-							<th>Remover</th>								
+							<th scope="col">Nome Completo</th>
+							<th scope="col">Número BI</th>	
+							<th scope="col">Contacto</th>
+							<th scope="col">Profissão</th>
+							<th scope="col">Residencia</th>																					
+							<th scope="col">Inscrição</th>
+							<th scope="col">Inicio</th>	
+							<th scope="col">Actualizar</th>												
+							<th scope="col">Remover</th>								
 												
 						</tr>
 					</thead>
@@ -82,6 +81,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				
+					<a href="<c:url value='/clientes/form' />" class="btn btn-primary margin-top">Novo</a>
 			</div>
 		</div>
 	</jsp:body>

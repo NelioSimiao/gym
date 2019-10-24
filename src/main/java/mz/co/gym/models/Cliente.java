@@ -11,16 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente implements Serializable , Cloneable{
+public class Cliente implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -58,17 +59,17 @@ public class Cliente implements Serializable , Cloneable{
 	private String localDeTrabalho;
 
 	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_Nascimento", nullable = false)
-	private LocalDate dataDeNascimento;
-
+	private LocalDate dataDeNascimento ; 
+	
 	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_Inscricao", nullable = false)
 	private LocalDate dataDeInscricao = LocalDate.now();
 
 	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_Inicio", nullable = false)
 	private LocalDate dataDeInicio;
 
@@ -169,10 +170,11 @@ public class Cliente implements Serializable , Cloneable{
 	}
 
 	public String dataDeInscricaoFormatada() {
-		return this.dataDeInscricao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		return this.dataDeInscricao.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"));
 	}
+
 	public String dataDeInicioFormatada() {
-		return this.dataDeInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		return this.dataDeInicio.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"));
 	}
 
 	@Override
@@ -199,5 +201,6 @@ public class Cliente implements Serializable , Cloneable{
 			return false;
 		return true;
 	}
+
 
 }
