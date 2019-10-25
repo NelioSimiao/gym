@@ -15,6 +15,12 @@
 		
 			<h3 class="text-center">Actualizar dados Cliente</h3>
 			
+				<c:if test="${param.error ne null}">
+					<div class="alert alert-danger">
+						<p>Dados inválidos!</p>
+					</div>
+		        </c:if>
+			
 				<form:form method="POST" modelAttribute="cliente"
 				action="/gym/clientes/update">
 				
@@ -31,12 +37,12 @@
 				<div class="form-group col-md-12">
 					<label for="autor">Nome Completo</label>
 					<form:input path="nomeCompleto" name="nomeCompleto"
-							class="form-control" required="required" />
+							class="form-control" required="required" data-error="enter valid username"/>
 				</div>
 				<div class="form-group col-md-4">
 					<label for="autor">Numero De BI</label>
 					<form:input path="numeroBI" name="numeroBI" class="form-control"
-							required="required" />
+							required="required"  data-error="enter valid username"/>
 				</div>
 				  <div class="form-group col-md-4">
 					<label for="autor">Naturalidade</label>
