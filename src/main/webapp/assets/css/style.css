@@ -12,3 +12,8 @@ h4{
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
+span.error {
+  color: #ff0000;
+	font-style: italic;
+}

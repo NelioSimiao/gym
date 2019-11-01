@@ -21,8 +21,8 @@
 					</div>
 		        </c:if>
 			
-				<form:form method="POST" modelAttribute="cliente"
-				action="/gym/clientes/update">
+				<form:form method="POST" modelAttribute="customer"
+				action="/gym/customers/update">
 				
 			  <input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
@@ -37,56 +37,77 @@
 				<div class="form-group col-md-12">
 					<label for="autor">Nome Completo</label>
 					<form:input path="nomeCompleto" name="nomeCompleto"
-							class="form-control" required="required" data-error="enter valid username"/>
+							class="form-control" data-error="enter valid username" />
+					<form:errors path="nomeCompleto" cssClass="error" />
 				</div>
+				
+				
 				<div class="form-group col-md-4">
-					<label for="autor">Numero De BI</label>
+					<label for="autor">BI</label>
 					<form:input path="numeroBI" name="numeroBI" class="form-control"
-							required="required"  data-error="enter valid username"/>
+							data-error="enter valid username" />
+				     <form:errors path="numeroBI" cssClass="error" />
 				</div>
-				  <div class="form-group col-md-4">
+				
+				 <div class="form-group col-md-4">
 					<label for="autor">Naturalidade</label>
-					<form:input path="naturalDe" name="naturalDe" class="form-control"
-							required="required" />
+					<form:input path="naturalDe" name="naturalDe" class="form-control" />
+					<form:errors path="naturalDe" cssClass="error" />
 				</div>
-						<div class="form-group col-md-4">
-					<label for="autor">Profissao</label>
+				
+				 
+				 <div class="form-group col-md-4">
+					<label for="autor">Profissão</label>
 					<form:input path="profissao" name="profissao" class="form-control" />
+						<form:errors path="profissao" cssClass="error" />
 				</div>
+				
 				<div class="form-group col-md-4">
 					<label for="autor">Contacto</label>
-					<form:input path="contacto" name="contacto" class="form-control"
-							required="required" />
+					<form:input path="contacto" name="contacto" class="form-control" />
+					<form:errors path="contacto" cssClass="error" />
 				</div>
+				
 				<div class="form-group col-md-8">
 					<label for="autor">Email</label>
 					<form:input path="email" name="email" class="form-control" />
+					<form:errors path="email" cssClass="error" />
+					
 				</div>
+				
 				<div class="form-group col-md-6">
 					<label for="autor">Residencia</label>
 					<form:input path="residencia" name="residencia"
-							class="form-control" required="required" />
+							class="form-control" />
+					<form:errors path="residencia" cssClass="error" />
 				</div>
+				
+				
 				<div class="form-group col-md-6">
 					<label for="autor">Local de Trabalho</label>
 					<form:input path="localDeTrabalho" name="localDeTrabalho"
-							class="form-control" required="required" />
+							class="form-control" />
+					<form:errors path="localDeTrabalho" cssClass="error" />
 				</div>
+				
 				
 				<div class="form-group col-md-6">
 					<label for="descricao">Data de Nascimento</label>
 					<form:input path="dataDeNascimento" name="dataDeNascimento"
 							class="form-control" placeholder="dd/MM/YYYY" />
+					<form:errors path="dataDeNascimento" cssClass="error" />
 				</div>
 				
 				<div class="form-group col-md-6">
 					<label for="descricao">Data de Inicio</label>
 					<form:input path="dataDeInicio" name="dataDeInicio"
 							class="form-control" placeholder="dd/MM/YYYY" />
+					<form:errors path="dataDeInicio" cssClass="error" />
 				</div>  
+				
 	            <div class="form-group col-md-12">
 				<input type="submit" value="Gravar" class="btn btn-primary" />
-				<a href="<c:url value='/clientes' />" class="btn btn-default">Cancelar</a>
+				<a href="<c:url value='/customers' />" class="btn btn-default">Cancelar</a>
 				</div>
 				</div>
 			</form:form>

@@ -4,21 +4,23 @@ package mz.co.gym.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente implements Serializable, Cloneable {
+public class CustomerEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,53 +28,62 @@ public class Cliente implements Serializable, Cloneable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
+    @NotBlank(message = "Preencher o Campo Nome")
 	@Column(name = "nome_Completo", nullable = false)
 	private String nomeCompleto;
+    
 
-	@NotNull
+    @NotBlank (message = "Preencher o Campo BI")
 	@Column(name = "numero_BI", nullable = true)
 	private String numeroBI;
 
-	@NotNull
+    
+    @NotBlank (message = "Preencher o Campo Naturalidade ")
 	@Column(name = "natural_De", nullable = false)
 	private String naturalDe;
+    
 
-	@NotNull
+    @NotBlank (message = "Preencher o Campo Profissão")
 	@Column(name = "profissao", nullable = true)
 	private String profissao;
+    
 
-	@NotNull
+    @NotBlank (message = "Preencher o Campo Contacto")
 	@Column(name = "contacto", nullable = false)
 	private String contacto;
+    
 
-	@NotNull
+    @NotBlank (message = "Preencher o Campo Profissao")
 	@Column(name = "email", nullable = true)
 	private String email;
+    
 
-	@NotNull
+    @NotBlank (message = "Preencher o Campo Residencia")
 	@Column(name = "residencia", nullable = true)
 	private String residencia;
+    
 
-	@NotNull
+    @NotBlank (message = "Preencher o Campo Residencia")
 	@Column(name = "local_Trabalho", nullable = true)
 	private String localDeTrabalho;
-
-	@NotNull
+    
+    
+    @NotNull (message = "Preencher o Campo Data de Nascimento")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_Nascimento", nullable = false)
 	private LocalDate dataDeNascimento ; 
+    
 	
-	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_Inscricao", nullable = false)
 	private LocalDate dataDeInscricao = LocalDate.now();
-
-	@NotNull
+   
+	
+	@NotNull (message = "Preencher o Campo Data de Inicio")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_Inicio", nullable = false)
 	private LocalDate dataDeInicio;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -193,7 +204,7 @@ public class Cliente implements Serializable, Cloneable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		CustomerEntity other = (CustomerEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

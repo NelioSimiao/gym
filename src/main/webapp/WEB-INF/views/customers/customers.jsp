@@ -30,36 +30,36 @@
 					</thead>
 					
 					<tbody>
-						<c:forEach items="${clientes}" var="cliente">
+						<c:forEach items="${customers}" var="customer">
 							<tr>
 								<td>
-								<c:out value="${cliente.nomeCompleto }" />
+								<c:out value="${customer.nomeCompleto }" />
 								</td>
 								
 								<td>
-								<c:out value="${cliente.numeroBI }" />
+								<c:out value="${customer.numeroBI }" />
 								</td>
 								<td>
-								<c:out value="${cliente.contacto }" />
+								<c:out value="${customer.contacto }" />
 								</td>
 								<td>
-								<c:out value="${cliente.profissao }" />
+								<c:out value="${customer.profissao }" />
 								</td>
 								<td>
-								<c:out value="${cliente.residencia }" />
+								<c:out value="${customer.residencia }" />
 								</td>
 								
 								<td>
-								<c:out value="${cliente.dataDeInscricaoFormatada() }" />
+								<c:out value="${customer.dataDeInscricaoFormatada() }" />
 								</td>
 								<td>
-								<c:out value="${cliente.dataDeInicioFormatada() }" />
+								<c:out value="${customer.dataDeInicioFormatada() }" />
 								</td>
 								<td>
 									<form method="post"
-										action="<c:url value='/clientes/actualizar/${cliente.id}' />">
+										action="<c:url value='/customers/actualizar/${customer.id}' />">
 										<input type="hidden" name="_method" value=GET>
-										<input type="hidden" name="id" value="${cliente.id}">
+										<input type="hidden" name="id" value="${customer.id}">
 										
 										<button type="submit" class="btn btn-info">
 											<span class="glyphicon glyphicon-pencil"></span> Editar
@@ -68,9 +68,9 @@
 								</td>
 								<td>
 									<form method="post"
-										action="<c:url value='/clientes/${cliente.id}' />">
+										action="<c:url value='/customers/${customer.id}' />">
 										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="id" value="${cliente.id}">
+										<input type="hidden" name="id" value="${customer.id}">
 										
 										<button type="submit" class="btn btn-danger">
 											<span class="glyphicon glyphicon-trash"></span> Remover
@@ -83,7 +83,7 @@
 				</table>
 				
 				
-					<a href="<c:url value='/clientes/form' />" class="btn btn-primary margin-top">Novo</a>
+					<a href="<c:url value='/customers/form' />" class="btn btn-primary margin-top">Novo</a>
 			</div>
 		</div>
 	</jsp:body>

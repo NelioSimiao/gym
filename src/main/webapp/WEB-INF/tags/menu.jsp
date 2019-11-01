@@ -31,9 +31,9 @@
 					aria-haspopup="true" aria-expanded="false"> Administração </a>
 
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="<c:url value='/clientes'/>">
+						<a class="dropdown-item" href="<c:url value='/customers'/>">
 							Clientes </a> <a class="dropdown-item"
-							href="<c:url value='/clientes'/>"> Pagamentos </a>
+							href="<c:url value='/payments'/>"> Pagamentos </a>
 					</div>
 			</sec:authorize>
 
