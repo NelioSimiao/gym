@@ -106,8 +106,8 @@
 				</div>  
 				
 	            <div class="form-group col-md-12">
-				<input type="submit" value="Gravar" class="btn btn-primary" />
-				<a href="<c:url value='/customers' />" class="btn btn-default">Cancelar</a>
+				<input type="submit" value="Gravar" class="btn btn-primary  btn-sm" />
+				<a href="<c:url value='/customers' />" class="btn btn-default  btn-sm">Cancelar</a>
 				</div>
 				</div>
 			</form:form>

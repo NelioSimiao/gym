@@ -12,6 +12,8 @@
 			
 		  <form:form method="POST" modelAttribute="customer"
 				action="/gym/customers/add">
+						
+				<div ${msg}class="alert alert-sucess"></div>
 		
 				 <div class="form-row">
 				 
@@ -24,14 +26,15 @@
 						    <div class="form-group col-md-12">
 								<label for="autor">Nome </label>
 							    <form:input path="nomeCompleto" id="nomeCompleto"
-							class="form-control" />	
-							 <form:errors path="nomeCompleto" cssClass="error" />
+							class="form-control" placeholder="Nome Completo" />	
+							<small> <form:errors path="nomeCompleto" cssClass="error" /></small>
 							</div>
 														
 							<div class="form-group col-md-4">
 								<label for="autor">BI</label>
-								<form:input path="numeroBI" name="numeroBI" class="form-control" />
-								<form:errors path="numeroBI" cssClass="error" />
+								<form:input path="numeroBI" name="numeroBI" class="form-control"
+							placeholder="Número de BI" />
+								<small><form:errors path="numeroBI" cssClass="error" /></small>
 								
 							</div>
 							
@@ -39,45 +42,48 @@
 							 <div class="form-group col-md-4">
 								<label for="autor">Naturalidade</label>
 								<form:input path="naturalDe" name="naturalDe"
-							class="form-control" />
-								<form:errors path="naturalDe" cssClass="error" />
+							class="form-control" placeholder="Naturalidade" />
+							<small>	<form:errors path="naturalDe" cssClass="error" /></small>
 							 </div>
 							 
 							
 							 <div class="form-group col-md-4">
 								<label for="autor">Profissão </label>
 								<form:input path="profissao" name="profissao"
-							class="form-control" />
-								<form:errors path="profissao" cssClass="error" />
+							class="form-control" placeholder="Profissão" />
+							<small>	<form:errors path="profissao" cssClass="error" /></small>
 							 </div>
 							 
 							
 							<div class="form-group col-md-4">
 								<label for="autor">Contacto </label>
-								<form:input path="contacto" name="contacto" class="form-control" />
-								<form:errors path="contacto" cssClass="error" />
+								<form:input path="contacto" name="contacto" class="form-control"
+							placeholder="Contacto" />
+							<small>	<form:errors path="contacto" cssClass="error" /></small>
 							</div>
 							
 							
 							<div class="form-group col-md-8">
 								<label for="autor">Email</label>
-								<form:input path="email" name="email" class="form-control" />
-									<form:errors path="email" cssClass="error" />
+								<form:input path="email" name="email" class="form-control"
+							placeholder="Email" />
+								<small>	<form:errors path="email" cssClass="error" /></small>
 							</div>
 							
 							
 							<div class="form-group col-md-6">
 								<label for="autor">Residencia</label>
 								<form:input path="residencia" name="residencia"
-							class="form-control" />
-								<form:errors path="residencia" cssClass="error" />
+							class="form-control" placeholder="Residencia" />
+							<small>	<form:errors path="residencia" cssClass="error" /></small>
 							</div>
 							
 							<div class="form-group col-md-6">
 								<label for="autor">Local de Trabalho</label>
 								<form:input path="localDeTrabalho" name="localDeTrabalho"
-							class="form-control" />
-								<form:errors path="localDeTrabalho" cssClass="error" />
+							class="form-control" placeholder="Residencia" />
+							<small>	<form:errors path="localDeTrabalho"
+								cssClass="error" /></small>
 							 </div>
 							 
 							
@@ -91,8 +97,8 @@
 				                      <span class="glyphicon glyphicon-trash"></span>
 				                    </div>
 				                 </div>
-				                 <form:errors path="dataDeNascimento"
-							cssClass="error" />
+				              <small>   <form:errors path="dataDeNascimento"
+								cssClass="error" /></small>
 							</div>
 							
 							
@@ -107,15 +113,17 @@
 				                    </div>
 				                    
 				                 </div>
-				                 <form:errors path="dataDeInicio" cssClass="error" />
+				                <small> <form:errors path="dataDeInicio"
+								cssClass="error" /></small>
 							</div>
 							
 			
 				          <div class="form-group col-md-12">
-							<input type="submit" value="Gravar" class="btn btn-primary">
-							<a href="<c:url value='/customers' />" class="btn btn-default">Cancelar</a>
+							<input type="submit" value="Gravar" class="btn btn-primary  btn-sm">
+							<a href="<c:url value='/customers' />" class="btn btn-secondary  btn-sm">Cancelar</a>
 						 </div>
 					</div>
+					
 			</form:form>
 		</div>
 		

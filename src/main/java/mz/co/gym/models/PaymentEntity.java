@@ -1,6 +1,5 @@
 package mz.co.gym.models;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,24 +8,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
-///
+
 @Entity
 @Table(name = "payment")
-public class PaymentEntity implements Serializable {
+public class PaymentEntity extends DomainEntity {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "payment_date", nullable = false)
@@ -44,20 +36,15 @@ public class PaymentEntity implements Serializable {
 	private BigDecimal amount;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "payment_type", nullable = false)
 	private PaymentType paymentType;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "payment_method", nullable = false)
+	private PaymentMethod paymentMethod;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false)
 	private CustomerEntity customer;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public LocalDate getPaymentdate() {
 		return paymentdate;
@@ -113,6 +100,14 @@ public class PaymentEntity implements Serializable {
 
 	public void setInitialDate(LocalDate initialDate) {
 		this.initialDate = initialDate;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 }

@@ -32,7 +32,8 @@
 
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" href="<c:url value='/customers'/>">
-							Clientes </a> <a class="dropdown-item"
+							Clientes </a> 
+							<a class="dropdown-item"
 							href="<c:url value='/payments'/>"> Pagamentos </a>
 					</div>
 			</sec:authorize>

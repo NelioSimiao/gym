@@ -37,7 +37,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		String[] permittedUrls = { "/", "/home", "/login" };
-		String[] authenticatedUrls = { "/processos", "/processos/**/*" };
+		String[] authenticatedUrls = { "/payments", "/customers/**/*" };
 		
 		http.csrf().disable()
 			.authorizeRequests().antMatchers(authenticatedUrls).authenticated()

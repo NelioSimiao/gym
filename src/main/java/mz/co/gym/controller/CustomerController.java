@@ -1,26 +1,39 @@
 package mz.co.gym.controller;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.co.gym.controller.validator.CustomerValidator;
 import mz.co.gym.models.CustomerEntity;
 import mz.co.gym.repositories.CustomerRepository;
 
 @Controller
 @RequestMapping("/customers")
-public class CustomerController {
+public class CustomerController extends TransactionalService {
+
+	@Autowired
+	private CustomerValidator customerValidator;
+
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(customerValidator);
+	}
 
 	private static final String PAGINA_CLIENTES = "customers/customers";
 	private static final String PAGINA_CADASTRO_CLIENTES = "customers/customer-form";
@@ -35,7 +48,7 @@ public class CustomerController {
 	public CustomerController(CustomerRepository clienteRepository) {
 		this.customerRepository = clienteRepository;
 	}
- 
+
 	@GetMapping("/form")
 	public String form(Model model) {
 		model.addAttribute("customer", new CustomerEntity());
@@ -56,24 +69,31 @@ public class CustomerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	@Transactional
-	public String add(@Valid CustomerEntity customer, // RedirectAttributes redirectModel,
-			BindingResult bindingResult) {
+	public String add(@Valid @ModelAttribute("customer") CustomerEntity customer, BindingResult result,
+			RedirectAttributes redirectModel) {
 
-		if (bindingResult.hasErrors()) {
+		if (result.hasErrors()) {
 			return PAGINA_CADASTRO_CLIENTES;
-
 		}
-		// redirectModel.addFlashAttribute("msg", "Cliente cadastrado com sucesso!");
 		this.customerRepository.save(customer);
+		redirectModel.addFlashAttribute("msgSucesso", "Cliente adicionada com sucesso!");
+
 		return REDIRECT_PAGINA_CLIENTES;
+
 	}
 
 	@DeleteMapping("/{id}")
-	@Transactional
 	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectModel) {
-		this.customerRepository.delete(id);
-		redirectModel.addFlashAttribute("msg", "Processo Excluido com sucesso!");
+
+		try {
+			this.customerRepository.delete(id);
+		} catch (org.hibernate.exception.ConstraintViolationException e) {
+			redirectModel.addFlashAttribute("errorSucesso", "Cliente não pode ser excluido pois pussui pagamentos.");
+			return REDIRECT_PAGINA_CLIENTES;
+
+
+		}
+		redirectModel.addFlashAttribute("msgSucesso", "Cliente Excluido com sucesso!");
 		return REDIRECT_PAGINA_CLIENTES;
 	}
 
@@ -93,13 +113,16 @@ public class CustomerController {
 	 */
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(@ModelAttribute("customer") @Valid CustomerEntity customer, BindingResult bindingResult) {
+	public String update(@ModelAttribute("customer") @Validated CustomerEntity customer, BindingResult bindingResult,
+			RedirectAttributes redirectModel) {
 
 		if (bindingResult.hasErrors()) {
 			return PAGINA_CADASTRO_CLIENTES;
 
 		}
 		this.customerRepository.save(customer);
+		redirectModel.addFlashAttribute("msgSucesso", "Cliente Actualizado com sucesso!");
+
 		return REDIRECT_PAGINA_CLIENTES;
 
 	}

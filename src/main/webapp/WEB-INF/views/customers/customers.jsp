@@ -3,14 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="custom" tagdir="/WEB-INF/tags"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
 <custom:template title="Processos cadastradas">
 	<jsp:body>
 		<div class="container">
 		
-			<h4 class="text-center text-primary ">Clientes </h4>
+			<h4 class="text-center text-primary ">CLIENTES </h4>
+			
+				<c:if test="${not empty msgSucesso}">
+						<div class="alert alert-success mt-2" role="alert">
+							<c:out value="${msgSucesso}" />
+						</div>
+				</c:if>		
+				<c:if test="${not empty errorSucesso}">
+						<div class="alert alert-danger mt-2" role="alert">
+							<c:out value="${errorSucesso}" />
+						</div>
+				</c:if>			
 			
 			<div class="table-responsive">
 				<table class="table table-stripped table-hover">
@@ -24,7 +35,8 @@
 							<th scope="col">Inscrição</th>
 							<th scope="col">Inicio</th>	
 							<th scope="col">Actualizar</th>												
-							<th scope="col">Remover</th>								
+							<th scope="col">Remover</th>	
+														
 												
 						</tr>
 					</thead>
@@ -61,7 +73,7 @@
 										<input type="hidden" name="_method" value=GET>
 										<input type="hidden" name="id" value="${customer.id}">
 										
-										<button type="submit" class="btn btn-info">
+										<button type="submit" class="btn btn-info  btn-sm"">
 											<span class="glyphicon glyphicon-pencil"></span> Editar
 										</button>
 									</form>
@@ -72,8 +84,8 @@
 										<input type="hidden" name="_method" value="DELETE">
 										<input type="hidden" name="id" value="${customer.id}">
 										
-										<button type="submit" class="btn btn-danger">
-											<span class="glyphicon glyphicon-trash"></span> Remover
+										<button type="submit" class="btn btn-danger  btn-sm">
+											<span class="glyphicon glyphicon-trash  btn-sm""></span> Apagar
 										</button>
 									</form>
 								</td>
@@ -83,7 +95,12 @@
 				</table>
 				
 				
-					<a href="<c:url value='/customers/form' />" class="btn btn-primary margin-top">Novo</a>
+					<a href="<c:url value='/customers/form' />"
+					class="btn btn-primary margin-top  btn-sm"">Novo</a>
+					
+						<a href="<c:url value='/payments' />"
+					class="btn btn-primary margin-top btn-sm">Pagamentos</a>
+					
 			</div>
 		</div>
 	</jsp:body>
