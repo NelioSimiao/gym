@@ -35,11 +35,4 @@ public abstract class DomainEntity implements Serializable {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	public PaymentEntity inactivated(PaymentEntity paymentEntity) {
-		paymentEntity.setActive(false);
-		return paymentEntity;
-
-	}
-
 }

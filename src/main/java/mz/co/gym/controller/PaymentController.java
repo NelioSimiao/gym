@@ -30,6 +30,8 @@ import mz.co.gym.models.PaymentMethod;
 import mz.co.gym.models.PaymentType;
 import mz.co.gym.repositories.CustomerRepository;
 import mz.co.gym.repositories.PaymentRepository;
+import mz.co.gym.services.ICustomerService;
+import mz.co.gym.services.IPaymentService;
 
 @Controller
 @RequestMapping("/payments")
@@ -39,10 +41,10 @@ public class PaymentController extends TransactionalService {
 	private static final String PAGE_PAYMENT_REGISTER_EDIT = "payments/payments-form-edit";
 
 	private static final String REDIRECT_PAGINA_PAYMENTS = "redirect:/payments";
-
-	private final PaymentRepository paymentRepository;
-
-	private final CustomerRepository customerRepository;
+	@Autowired
+	private IPaymentService paymentService;
+	@Autowired
+	private ICustomerService customerService;
 
 	@Autowired
 	private PaymentValidator paymentValidator;
@@ -52,11 +54,6 @@ public class PaymentController extends TransactionalService {
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(paymentValidator);
-	}
-
-	public PaymentController(PaymentRepository paymentRepository, CustomerRepository customerRepository) {
-		this.paymentRepository = paymentRepository;
-		this.customerRepository = customerRepository;
 	}
 
 	/**
@@ -79,7 +76,7 @@ public class PaymentController extends TransactionalService {
 	 */
 	@GetMapping
 	public String listAll(Model model) {
-		List<PaymentEntity> validatePayments = paymentRepository.findAllValidatePayment(LocalDate.now());
+		List<PaymentEntity> validatePayments = paymentService.findAllValidatePayment(LocalDate.now());
 		model.addAttribute("payments", validatePayments);
 		model.addAttribute("validatePayment", true);
 
@@ -94,7 +91,7 @@ public class PaymentController extends TransactionalService {
 	 */
 	@GetMapping("/inspiredPayment")
 	public String inspiredPayment(Model model) {
-		List<PaymentEntity> findAll = paymentRepository.findAllInspiredPayment(LocalDate.now());
+		List<PaymentEntity> findAll = paymentService.findAllInspiredPayment(LocalDate.now());
 		model.addAttribute("payments", findAll);
 		model.addAttribute("validatePayment", false);
 
@@ -119,7 +116,7 @@ public class PaymentController extends TransactionalService {
 		}
 		processPayments.forEach(p -> p.process(payment));
 
-		this.paymentRepository.save(payment);
+		this.paymentService.save(payment);
 		redirectModel.addFlashAttribute("msgSucesso", "Pagamento efectudo com sucesso!");
 
 		return REDIRECT_PAGINA_PAYMENTS;
@@ -127,7 +124,7 @@ public class PaymentController extends TransactionalService {
 
 	@GetMapping(value = "/update/{id}")
 	public String update(@PathVariable Long id, Model model) {
-		PaymentEntity payment = this.paymentRepository.findOne(id);
+		PaymentEntity payment = this.paymentService.findByid(id);
 		model.addAttribute("payment", payment);
 		model.mergeAttributes(addAttributes());
 		return PAGE_PAYMENT_REGISTER_EDIT;
@@ -135,8 +132,9 @@ public class PaymentController extends TransactionalService {
 
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectModel) {
-		PaymentEntity paymentToInactivate = this.paymentRepository.findOne(id);
-		this.paymentRepository.save(paymentToInactivate.inactivated(paymentToInactivate));
+
+		PaymentEntity paymentEntity = this.paymentService.findByid(id);
+		this.paymentService.inactivar(paymentEntity);
 		redirectModel.addFlashAttribute("msgSucesso", "Pagamento excluido com sucesso!");
 		return REDIRECT_PAGINA_PAYMENTS;
 	}
@@ -145,7 +143,7 @@ public class PaymentController extends TransactionalService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("paymentTypes", PaymentType.values());
 		map.put("paymentMethods", PaymentMethod.values());
-		map.put("customers", customerRepository.findAll(new Sort("nomeCompleto")));
+		map.put("customers", customerService.findAll());
 		map.put("payment", new PaymentEntity());
 
 		return map;

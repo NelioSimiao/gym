@@ -2,9 +2,7 @@ package mz.co.gym.controller;
 
 import javax.validation.Valid;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.co.gym.controller.validator.CustomerValidator;
 import mz.co.gym.models.CustomerEntity;
-import mz.co.gym.repositories.CustomerRepository;
+import mz.co.gym.services.ICustomerService;
+import mz.co.gym.services.IPaymentService;
 
 @Controller
 @RequestMapping("/customers")
@@ -41,13 +40,11 @@ public class CustomerController extends TransactionalService {
 
 	private static final String REDIRECT_PAGINA_CLIENTES = "redirect:/customers";
 
-	private static final Sort SORT_BY_NAME = new Sort("nomeCompleto");
+	@Autowired
+	private ICustomerService customerService;
+	@Autowired
 
-	private final CustomerRepository customerRepository;
-
-	public CustomerController(CustomerRepository clienteRepository) {
-		this.customerRepository = clienteRepository;
-	}
+	private IPaymentService paymentService;
 
 	@GetMapping("/form")
 	public String form(Model model) {
@@ -57,7 +54,7 @@ public class CustomerController extends TransactionalService {
 
 	@GetMapping
 	public String listar(Model model) {
-		model.addAttribute("customers", customerRepository.findAll(SORT_BY_NAME));
+		model.addAttribute("customers", customerService.findAll());
 		return PAGINA_CLIENTES;
 	}
 
@@ -75,7 +72,7 @@ public class CustomerController extends TransactionalService {
 		if (result.hasErrors()) {
 			return PAGINA_CADASTRO_CLIENTES;
 		}
-		this.customerRepository.save(customer);
+		this.customerService.save(customer);
 		redirectModel.addFlashAttribute("msgSucesso", "Cliente adicionada com sucesso!");
 
 		return REDIRECT_PAGINA_CLIENTES;
@@ -84,22 +81,13 @@ public class CustomerController extends TransactionalService {
 
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectModel) {
-
-		try {
-			this.customerRepository.delete(id);
-		} catch (org.hibernate.exception.ConstraintViolationException e) {
-			redirectModel.addFlashAttribute("errorSucesso", "Cliente não pode ser excluido pois pussui pagamentos.");
-			return REDIRECT_PAGINA_CLIENTES;
-
-
-		}
-		redirectModel.addFlashAttribute("msgSucesso", "Cliente Excluido com sucesso!");
+		this.delete(redirectModel, id);
 		return REDIRECT_PAGINA_CLIENTES;
 	}
 
 	@GetMapping(value = "/actualizar/{id}")
 	public String edit(@PathVariable Long id, Model model) {
-		CustomerEntity customer = this.customerRepository.findOne(id);
+		CustomerEntity customer = this.customerService.findById(id);
 		model.addAttribute("customer", customer);
 		return PAGINA_CADASTRO_CLIENTES_EDIT;
 	}
@@ -120,11 +108,22 @@ public class CustomerController extends TransactionalService {
 			return PAGINA_CADASTRO_CLIENTES;
 
 		}
-		this.customerRepository.save(customer);
+		this.customerService.save(customer);
 		redirectModel.addFlashAttribute("msgSucesso", "Cliente Actualizado com sucesso!");
 
 		return REDIRECT_PAGINA_CLIENTES;
 
+	}
+
+	private void delete(RedirectAttributes redirectModel, Long id) {
+
+		if (!paymentService.findPaymentByCustomer(customerService.findById(id)).isEmpty()) {
+			redirectModel.addFlashAttribute("errorSucesso", "Cliente não pode ser excluido porque possui pagamento ");
+		} else {
+
+			this.customerService.delete(id);
+			redirectModel.addFlashAttribute("msgSucesso", "Cliente Excluido com sucesso!");
+		}
 	}
 
 }

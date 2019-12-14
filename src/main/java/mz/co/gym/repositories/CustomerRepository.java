@@ -9,7 +9,8 @@ import mz.co.gym.models.CustomerEntity;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
+	
 	CustomerEntity findByNomeCompleto(String nomeCompleto);
+	
 	List<CustomerEntity> findAllByOrderByNomeCompletoDesc();
-
 }
