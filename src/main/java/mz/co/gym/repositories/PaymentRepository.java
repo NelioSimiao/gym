@@ -23,6 +23,9 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Long> {
 	@Query("select p from PaymentEntity p where p.customer =:customer ")
 	List<PaymentEntity>  findPaymentByCustomer(@Param("customer") CustomerEntity customer);
 	
+	@Query("select p from PaymentEntity p where p.year =:year ")
+	List<PaymentEntity>  findAllByYear(@Param("year") Long year);
+	
 
 
 }

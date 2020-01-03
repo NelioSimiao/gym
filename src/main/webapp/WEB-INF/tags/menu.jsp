@@ -35,6 +35,9 @@
 							Clientes </a> 
 							<a class="dropdown-item"
 							href="<c:url value='/payments'/>"> Pagamentos </a>
+							
+							<a class="dropdown-item"
+							href="<c:url value='/engineUsers'/>"> Usuários </a>
 					</div>
 			</sec:authorize>
 

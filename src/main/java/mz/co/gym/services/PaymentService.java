@@ -15,7 +15,6 @@ import mz.co.gym.repositories.PaymentRepository;
 public class PaymentService implements IPaymentService {
 
 	private static final long serialVersionUID = 1L;
-	private static final Sort SORT_BY_NAME = new Sort("nomeCompleto");
 
 	@Autowired
 	private PaymentRepository paymentRepository;
@@ -48,17 +47,28 @@ public class PaymentService implements IPaymentService {
 
 	@Override
 	public List<PaymentEntity> findAll() {
-		return paymentRepository.findAll(SORT_BY_NAME);
+		return paymentRepository.findAll();
 	}
 
 	@Override
 	public PaymentEntity save(PaymentEntity payment) {
+		this.setYearAndMonth(payment);
 		return paymentRepository.save(payment);
 	}
 
 	@Override
 	public void delete(PaymentEntity payment) {
 		paymentRepository.delete(payment);
+	}
+
+	private void setYearAndMonth(PaymentEntity payment) {
+		payment.setMonth(Long.valueOf(LocalDate.now().getMonth().getValue()));
+		payment.setYear(Long.valueOf(LocalDate.now().getYear()));
+	}
+
+	@Override
+	public List<PaymentEntity> findAllByYear(Long year) {
+		return paymentRepository.findAllByYear(year);
 	}
 
 }

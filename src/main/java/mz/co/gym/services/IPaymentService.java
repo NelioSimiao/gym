@@ -16,7 +16,7 @@ public interface IPaymentService extends Serializable {
 	void delete(PaymentEntity payment);
 
 	List<PaymentEntity> findAll();
-
+	List<PaymentEntity> findAllByYear(Long year);
 	List<PaymentEntity> findAllValidatePayment(LocalDate now);
 
 	List<PaymentEntity> findAllInspiredPayment(LocalDate now);

@@ -55,6 +55,8 @@ public class CustomerController extends TransactionalService {
 	@GetMapping
 	public String listar(Model model) {
 		model.addAttribute("customers", customerService.findAll());
+		model.addAttribute("totalCustomers", customerService.count());
+
 		return PAGINA_CLIENTES;
 	}
 

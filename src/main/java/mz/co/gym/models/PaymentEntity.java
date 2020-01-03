@@ -35,6 +35,12 @@ public class PaymentEntity extends DomainEntity {
 	@Column(name = "amount", nullable = false)
 	private BigDecimal amount;
 
+	@Column(name = "YEAR", nullable = false)
+	private Long year;
+
+	@Column(name = "MONTH", nullable = false)
+	private Long month;
+
 	@Enumerated(EnumType.STRING)
 	private PaymentType paymentType;
 
@@ -100,6 +106,22 @@ public class PaymentEntity extends DomainEntity {
 
 	public void setInitialDate(LocalDate initialDate) {
 		this.initialDate = initialDate;
+	}
+
+	public Long getYear() {
+		return year;
+	}
+
+	public void setYear(Long year) {
+		this.year = year;
+	}
+
+	public Long getMonth() {
+		return month;
+	}
+
+	public void setMonth(Long month) {
+		this.month = month;
 	}
 
 	public PaymentMethod getPaymentMethod() {

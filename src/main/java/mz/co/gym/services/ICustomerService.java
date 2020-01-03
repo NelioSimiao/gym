@@ -17,6 +17,8 @@ public interface ICustomerService extends Serializable {
 
 	CustomerEntity findById(Long id);
 
+	Long count();
+
 	CustomerEntity findByNomeCompleto(String nomeCompleto);
 
 	List<CustomerEntity> findAllByOrderByNomeCompletoDesc();

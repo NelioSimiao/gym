@@ -109,10 +109,12 @@
 					
 					<a href="<c:url value='/payments/inspiredPayment' />"
 					class="btn btn-danger margin-top btn-sm">Pag vencidos</a>
-					
-						
+		
 					<a href="<c:url value='/customers' />"
 					class="btn btn-primary margin-top  btn-sm"">Clientes</a>
+					
+						<a href="<c:url value='/payments/summarise' />"
+					class="btn btn-danger margin-top btn-sm">Mapa Resumo</a>
 			</div>
 		</div>
 	</jsp:body>

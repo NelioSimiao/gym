@@ -52,4 +52,9 @@ public class CustomerService implements ICustomerService {
 		return save(customer);
 	}
 
+	@Override
+	public Long count() {
+		return customerRepository.count();
+	}
+
 }

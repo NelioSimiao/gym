@@ -94,12 +94,22 @@
 					</tbody>
 				</table>
 				
+			
+	     	    <p class="text-right text-primary">Número total dos Clientes : <c:out
+						value="${totalCustomers}" /> </p>
+		   	   <hr>
+		
+			<br>
+				
+				
 				
 					<a href="<c:url value='/customers/form' />"
-					class="btn btn-primary margin-top  btn-sm"">Novo</a>
+					class="btn btn-primary margin-top  btn-sm">Novo</a>
 					
 						<a href="<c:url value='/payments' />"
 					class="btn btn-primary margin-top btn-sm">Pagamentos</a>
+					
+					
 					
 			</div>
 		</div>

@@ -9,6 +9,6 @@ import mz.co.gym.models.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-Usuario findByLogin(String login);
+  Usuario findByLogin(String login);
 	
 }
